@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  ch_server:
+    image: yandex/clickhouse-server
+    cap_add:
+      - "NET_ADMIN"
+      - "IPC_LOCK"
+      - "SYS_NICE"
+      - "SYS_PTRACE"
+    ports:
+      - 8123:8123
+      - 9000:9000
+      - 9009:9009
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    volumes:
+      - ./data/clickhouse:/var/lib/clickhouse
+  mock_query_generator:
+    build: mock_query_generator/.
+    ports:
+      - 8124:5000
+  traffic_processor:
+    build: model/.
+    # network_mode: "host"
+    env_file:
+      - model/model.env
