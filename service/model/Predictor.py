@@ -21,7 +21,6 @@ class Predictor:
 
     @staticmethod
     def get_label(summary_row: pd.Series):
-        print(summary_row)
         if summary_row["sql_injection"]:
             return 2
         if summary_row["eval_injection"]:

@@ -41,18 +41,17 @@ class TrafficLoader:
 if __name__ == '__main__':
     logger = logging.getLogger("Main-logger")
     logger.setLevel(logging.INFO)
-    #ch_client = CustomClickhouseClient(vectors_buffer_max_size=1, host=CH_URL, port=CH_PORT)
-    #ch_client.check_connection()
+    ch_client = CustomClickhouseClient(vectors_buffer_max_size=1, host=CH_URL, port=CH_PORT)
+    ch_client.check_connection()
 
     traffic_loader = TrafficLoader(TRAFFIC_URL, USER_TOKEN)
     predictor = Predictor()
 
     # Create if not exists
-    #print("Creating db")
-    #ch_client.create_dev_database()
-    #ch_client.create_dev_data_table()
+    ch_client.create_dev_database()
+    ch_client.create_dev_data_table()
     logger.info("Service is started")
-    print("A")
+
     while True:
         resp = traffic_loader.get_new_vector().json()
         logger.info(f"Got new query: {resp}")
@@ -62,6 +61,5 @@ if __name__ == '__main__':
         logger.info(f'Prediction is pushed. Response: {traffic_loader.post_prediction(resp["id"], prediction).json()}')
         resp["prediction"] = prediction
 
-        #ch_client.store_vector(resp)
-        #time.sleep(1.0)
-        break
+        ch_client.store_vector(resp)
+        time.sleep(1.0)
