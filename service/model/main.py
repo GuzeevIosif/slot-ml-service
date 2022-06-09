@@ -57,7 +57,6 @@ if __name__ == '__main__':
         logger.info(f"Got new query: {resp}")
 
         prediction = predictor.predict([resp])[0]
-        print(resp["id"], prediction)
         logger.info(f'Prediction is pushed. Response: {traffic_loader.post_prediction(resp["id"], prediction).json()}')
         resp["prediction"] = prediction
 
