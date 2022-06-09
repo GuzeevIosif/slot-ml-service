@@ -24,3 +24,8 @@ TF-IDF classification approach is described in this study: https://revistageinte
 
 Same problem is solved here, however, it's a supervised learning case, since all train samples have labels:
 https://scholarworks.sjsu.edu/cgi/viewcontent.cgi?article=1649&context=etd_projects
+
+A big study were made, open-source code was provided.
+
+Article: https://scholarworks.sjsu.edu/cgi/viewcontent.cgi?article=1727&context=etd_projects
+Code: https://github.com/tungpv98/Detect-Sql-Injection-by-Machine-Learning
