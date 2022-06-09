@@ -1,6 +1,6 @@
 ### About
 
-This project is aimed to solve injection queries classification problem.
+This project is aimed to solve injection queries classification problem given by https://slot-ml.com/.
 
 ### Structure
 
@@ -14,4 +14,4 @@ All are save in the clickhouse database.
 In order to run service, you need firstly specify your `user_token` in `service/model/model.env` file.
 
 Use mock traffic generator for testing purposes: set `TRAFFIC_URL=http://mock_query_generator:5000/`.
-Mock traffic generator will always return the same query. Also it supports all API's from real service.
+Mock traffic generator will always return the same query. Also it supports all API's from real service (https://slot-ml.com/).
