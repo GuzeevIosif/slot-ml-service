@@ -7,7 +7,7 @@ This project is aimed to solve injection queries classification problem given by
 All research notebooks can be found in the `research` folder.
 
 `service` folder have containerized service with latest model.
-All are save in the clickhouse database.
+All users queries are saved in the clickhouse database.
 
 #### Service config
 
