@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+<body>
+    <div style = "text-align:center;">
+        <canvas id="queriesPerHoursChart" width="900" height="400"></canvas>
+    </div>
+    <canvas id="totalQueriesCountPie" width="900" height="400"></canvas>
+<script>
+    window.chartColors = {
+        red: 'rgb(255, 99, 132)',
+        orange: 'rgb(255, 159, 64)',
+        yellow: 'rgb(255, 205, 86)',
+        green: 'rgb(75, 192, 192)',
+        blue: 'rgb(54, 162, 235)',
+        purple: 'rgb(153, 102, 255)',
+        grey: 'rgb(201, 203, 207)'
+    };
+
+
+    var ctx = document.getElementById("queriesPerHoursChart").getContext("2d");
+    var lineChart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: {{labels | safe}},
+                datasets: [
+                    {
+                        label: "safe",
+                        backgroundColor: window.chartColors.green,
+                        borderColor: window.chartColors.green,
+                        data: {{safe_queries | safe}},
+                        fill: false,
+                    },
+                    {
+                        label: "sql injection",
+                        backgroundColor: window.chartColors.red,
+                        borderColor: window.chartColors.red,
+                        data:  {{sql_injections_queries | safe}},
+                        fill: false,
+                    },
+                                        {
+                        label: "eval injection",
+                        backgroundColor: window.chartColors.orange,
+                        borderColor: window.chartColors.orange,
+                        data: {{eval_injections_queries | safe}},
+                        fill: false,
+                    }
+                ]
+            },
+            options: {
+                responsive: false,
+                title: {
+                    display: true,
+                    text: "Queries per hour chart"
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        labelString: "Date and hours",
+                    }],
+                    yAxes: [{
+                        display: true,
+                        labelString: "Amount of queries"
+                    }]
+                }
+            }
+        }
+    )
+
+    var ctx2 = document.getElementById("totalQueriesCountPie").getContext("2d");
+    var PieChart = new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: {{pie_data | safe}},
+                backgroundColor: [
+                    window.chartColors.green,
+                    window.chartColors.red,
+                    window.chartColors.orange,
+                ]
+            }],
+            labels: [
+                "safe",
+                "sql injection",
+                "eval injection",
+            ]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: "Queries count by predicted label"
+            },
+        }
+    })
+</script>
+</body>
+</html>

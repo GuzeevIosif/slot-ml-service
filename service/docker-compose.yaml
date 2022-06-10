@@ -24,6 +24,5 @@ services:
       - 8124:5000
   traffic_processor:
     build: model/.
-    # network_mode: "host"
     env_file:
       - model/model.env

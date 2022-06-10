@@ -61,4 +61,4 @@ if __name__ == '__main__':
         resp["prediction"] = prediction
 
         ch_client.store_vector(resp)
-        time.sleep(0.1)
+        time.sleep(0.01)

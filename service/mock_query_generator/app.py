@@ -1,4 +1,4 @@
-import os
+import pandas as pd
 from flask import Flask, json
 
 api = Flask(__name__)
@@ -13,16 +13,10 @@ def get_token(token):
 
 @api.route(f'/api/v1/users/<string:token>/vectors/', methods=['GET'])
 def vectors(token):
-    return json.dumps({
-        'meta1': 'REQUEST_ARGS',
-        'id': '27457723e25d71932c9f229ed52cae02',
-        'meta2': 'action',
-        'vector': 'profile;area=statistics;u=966409',
-        'meta3': 200,
-        'meta6': '157.55.39.237',
-        'meta4': 372,
-        'meta5': 'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)',
-    })
+    # We load data each time, therefore it will slow our response a bit.
+    # Because real API won't response immediately
+    data = pd.read_csv("data.csv")
+    return json.dumps(data.sample().to_dict())
 
 
 @api.route(f'/api/v1/users/<string:token>/results/', methods=['POST'])

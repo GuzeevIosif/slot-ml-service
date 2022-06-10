@@ -41,7 +41,7 @@ class CustomClickhouseClient(Client):
             )
             ENGINE = MergeTree
             PARTITION BY dt
-            ORDER BY (ts, meta1)
+            ORDER BY (prediction, dt)
         """
         return self.execute(create_data_table_query)
 
