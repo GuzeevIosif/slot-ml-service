@@ -56,7 +56,7 @@ class CustomClickhouseClient(Client):
         if len(self.vectors_buffer) >= self.vectors_buffer_max_size:
             self.logger.info(f"{len(self.vectors_buffer)} elements are stored in the buffer. "
                              f"Pushing it to the database.")
-            result = self.execute(f"INSERT INTO {database_name}.query_logs (*) VALUES", [vec_copy])
+            result = self.execute(f"INSERT INTO {database_name}.query_logs (*) VALUES", self.vectors_buffer)
             self.logger.info(f"{result} elements are pushed successfully.")
             self.vectors_buffer.clear()
 

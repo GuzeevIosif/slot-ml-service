@@ -41,7 +41,7 @@ class TrafficLoader:
 if __name__ == '__main__':
     logger = logging.getLogger("Main-logger")
     logger.setLevel(logging.INFO)
-    ch_client = CustomClickhouseClient(vectors_buffer_max_size=1, host=CH_URL, port=CH_PORT)
+    ch_client = CustomClickhouseClient(vectors_buffer_max_size=10, host=CH_URL, port=CH_PORT)
     ch_client.check_connection()
 
     traffic_loader = TrafficLoader(TRAFFIC_URL, USER_TOKEN)
@@ -61,4 +61,4 @@ if __name__ == '__main__':
         resp["prediction"] = prediction
 
         ch_client.store_vector(resp)
-        time.sleep(1.0)
+        time.sleep(0.1)
