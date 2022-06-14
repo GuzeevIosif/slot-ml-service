@@ -2,8 +2,14 @@
 
 This project is aimed to solve injection queries classification problem given by https://slot-ml.com/.
 
+## Analysis
+
 You can get analysis report via special analytical service host on http://127.0.0.1:5000/ address by default.
-Fo this purposes, run docker image from `service/analysis_service` folder.
+For this purposes, run docker image from `service/analysis_service` folder.
+
+Charts example:
+
+![analysis example](readme_img/analysis.png)
 
 ### Structure
 
