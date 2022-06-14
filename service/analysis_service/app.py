@@ -27,7 +27,6 @@ def get_queries_per_our_chart_data():
 	data = ch_client.execute(queries_per_house_ch_query)
 	t = pd.DataFrame(data, columns=["date", "prediction", "count"])
 	t = pd.pivot_table(t, index="date", columns="prediction", fill_value=0.0)
-	print(t.index)
 	return t.index.strftime("%H:%M %m/%d/%Y"), t.iloc[:, 0].values, t.iloc[:, 1].values, t.iloc[:, 2].values
 
 
@@ -41,7 +40,6 @@ def get_all_queries_count_by_label():
 	ORDER BY prediction asc
 	"""
 	data = ch_client.execute(pie_data_query)
-	print(data)
 	return list(map(lambda tup: tup[1], data))
 
 
